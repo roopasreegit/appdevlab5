@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,19 +44,19 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <input type="text" id="username" placeholder="Username" required>
         <input type="password" id="password" placeholder="Password" required>
-        <button onclick="login()">Login</button>
-        <p>Don't have an account? <a href="register.html">Register</a></p>
+        <button onclick="register()">Register</button>
+        <p>Already have an account? <a href="login.html">Login</a></p>
     </div>
 
     <script>
-        function login() {
+        function register() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            fetch('/login', {
+            fetch('/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,9 +65,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.token) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'index.html';
+                if (data.message) {
+                    alert(data.message);
+                    window.location.href = 'login.html';
                 } else {
                     alert(data.error);
                 }
